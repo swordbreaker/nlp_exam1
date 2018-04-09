@@ -2,11 +2,22 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy.stats as stats
 import scipy.linalg as linalg
+import stoch_stats
 %matplotlib inline
 
 #Aufgabe 1
 
 x = np.array([3.2, 4.2, 4.1, 2.8, 3.8, 4.2, 4.5, 3.9, 2.1])
+
+s = stoch_stats.StochStats(x)
+print(s.mean())
+print(s.median())
+print(s.std_emp())
+print(s.std_theo())
+print(s.quartil())
+s.box_plot()
+
+
 mean = x.mean()
 median = np.median(x)
 std_emp = x.std(ddof=0) #empirische

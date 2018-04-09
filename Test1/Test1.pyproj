@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>9f7cda2f-fb53-43a6-899a-05914d531475</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>test_py_dot_plus.py</StartupFile>
+    <StartupFile>proba_tree.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,7 +22,13 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="hmm.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="proba_tree.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="stoch_stats.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Test1.py" />
