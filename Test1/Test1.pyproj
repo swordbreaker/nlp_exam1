@@ -22,10 +22,20 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Examples\diskrete_warscheinlichkeits_verteilung.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Examples\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="hmm.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="proba_tree.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="proba_tree_test.py" />
+    <Compile Include="standard_deviation.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="stoch_stats.py">
@@ -38,6 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <InterpreterReference Include="Global|ContinuumAnalytics|Anaconda36-64" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Examples\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

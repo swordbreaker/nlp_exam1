@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import scipy.stats as stats
 import scipy.linalg as linalg
 import stoch_stats
+import standard_deviation
 %matplotlib inline
 
 #Aufgabe 1
@@ -68,6 +69,7 @@ z2 = stats.norm.ppf(0.9,0,1)  # (85 - mu) / omega
 
 linalg.solve([[1, z1],[1, z2]], [55, 85])
 
+standard_deviation.StandardDeviation.calc_avg_std(0.25, 55, 0.9, 85)
 
 # Aufgabe 3
 
