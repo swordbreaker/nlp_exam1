@@ -184,13 +184,15 @@ class Hmm(object):
         self.o = o
 
     def draw_graph(self):
-        n = len(self.p0)
+        n = self.p0.shape[1]
         dot = Digraph()
         for i in range(n):
             dot.node(str(i), str(i))
             for k in range(n):
                 if(self.U[i,k] != 0):
                     dot.edge(str(i), str(k), label=f"{self.U[i,k]:2.2f}")
+
+        
         dot.render('graphviz/hmm.gv', view=True)
 
     def forward(self):
