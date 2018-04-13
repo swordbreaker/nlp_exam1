@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>9f7cda2f-fb53-43a6-899a-05914d531475</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>proba_tree.py</StartupFile>
+    <StartupFile>mm.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,6 +22,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="mm.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="verteilungen\binomial_verteilung.py">
       <SubType>Code</SubType>
     </Compile>
