@@ -59,8 +59,7 @@ class MM():
             s = f"p{i} = "
             l = 0
             for j in range(c):
-                if i == j: 
-                    continue
+                if i == j: continue
                 if j == absorb_index:
                     b[i-k] = U[i,j]
                     l = 1
@@ -68,6 +67,41 @@ class MM():
                 if(U[i,j] != 0):
                         A[i-k,j-l] = -U[i,j]
                         s += f"{U[i,j]} * p{j} + "
+            
+            print(s)
+
+        print("A = ")
+        print(A)
+        print("b = ")
+        print(b)
+        return linalg.solve(A,b)
+
+    def absorb_lenght(self, absorb_index):
+        """ absorb_index index of the absorb node """
+
+        U = self.u
+        r, c = self.u.shape
+        A = np.eye(r-1)
+        b = np.ones(shape=(r-1, 1))
+
+        k = 0
+        for i in range(r):
+            if i == absorb_index: 
+                k = 1
+                continue
+            s = f"m{i} = 1 + "
+            l = 0
+            for j in range(c):
+                if i == j: 
+                    if(U[i,j] == 1):
+                        b[i-k] = 0
+                    continue
+                if j == absorb_index:
+                    l = 1
+                    continue
+                if(U[i,j] != 0):
+                        A[i-k,j-l] = -U[i,j]
+                        s += f"{U[i,j]} * m{j} + "
             
             print(s)
 
@@ -93,20 +127,20 @@ def example():
     print(mm.grenzverteilung())
 
 
-u = [
-    [1  ,   0,  0,   0,   0,   0],
-    [0.4,   0,0.6,   0,   0,   0],
-    [0.4,   0,  0,   0, 0.6,   0],
-    [0  , 0.4,  0,   0,   0, 0.6],
-    [0  ,   0,  0, 0.4,   0, 0.6],
-    [0  ,   0,  0,   0,   0,   1],
-    ]
-u = np.array(u)
-start = np.array([0,1,0,0,0,0])
+    u = [
+        [1  ,   0,  0,   0,   0,   0],
+        [0.4,   0,0.6,   0,   0,   0],
+        [0.4,   0,  0,   0, 0.6,   0],
+        [0  , 0.4,  0,   0,   0, 0.6],
+        [0  ,   0,  0, 0.4,   0, 0.6],
+        [0  ,   0,  0,   0,   0,   1],
+        ]
+    u = np.array(u)
+    start = np.array([0,1,0,0,0,0])
 
-mm = MM(start, u)
-print(mm.absorb_values(5))
-mm.draw_graph()
+    mm = MM(start, u)
+    print(mm.absorb_values(5))
 
+    print(mm.absorb_lenght(5))
 
-       
+    mm.draw_graph()
