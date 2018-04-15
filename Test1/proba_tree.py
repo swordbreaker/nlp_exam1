@@ -54,6 +54,11 @@ class Node:
     def _draw(self, dot:Digraph, i:int):
         k = i + 1
         for c in self.childs:
+            if c.label == "":
+                label = str(k)
+            else:
+                label = c.label
+
             dot.node(str(k), label=c.label)
             dot.edge(str(i), str(k), label=str(c.weight))
             k += c._draw(dot, k)

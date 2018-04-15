@@ -59,7 +59,11 @@ class MM():
             s = f"p{i} = "
             l = 0
             for j in range(c):
-                if i == j: continue
+                if i == j: 
+                    if(U[i,j] != 0):
+                        A[i-k,j-l] = 1 - U[i,j]
+                        s += f"{1 - U[i,j]} * p{j} + "
+                    continue
                 if j == absorb_index:
                     b[i-k] = U[i,j]
                     l = 1
@@ -95,6 +99,9 @@ class MM():
                 if i == j: 
                     if(U[i,j] == 1):
                         b[i-k] = 0
+                    elif(U[i,j] != 0):
+                        A[i-k,j-l] = 1 - U[i,j]
+                        s += f"{1 - U[i,j]} * m{j} + "
                     continue
                 if j == absorb_index:
                     l = 1

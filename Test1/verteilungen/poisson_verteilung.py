@@ -1,4 +1,5 @@
 import  math
+from scipy.stats import poisson
 
 class PoissonVerteilung():
     """description of class"""
@@ -8,6 +9,7 @@ class PoissonVerteilung():
         return PoissonVerteilung(n * p)
 
     def __init__(self, lambda_):
+        """ lambda_ : mittlerer interval """
         self.lambda_ = lambda_
 
     def __prob(self, k):
@@ -25,9 +27,12 @@ class PoissonVerteilung():
     def variance(self):
         return self.lambda_
 
+    def cdf(self, k):
+        return poisson.cdf(k, self.lambda_)
+
 def poisson_prop(X, _lambda):
     poisson = PoissonVerteilung(_lambda)
-    return bio.probability(X)
+    return poisson.probability(X)
 
 def example():
     p = 0.03 # 3% chance auf kontrolle

@@ -22,6 +22,16 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Exercises\um1.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Exercises\um2.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Exercises\um3.py" />
+    <Compile Include="Exercises\um4.py" />
+    <Compile Include="Exercises\um5.py" />
+    <Compile Include="Exercises\um6.py" />
     <Compile Include="mm.py">
       <SubType>Code</SubType>
     </Compile>
@@ -35,6 +45,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="hmm.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="verteilungen\diskrete_verteilung.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="verteilungen\geometrische_verteilung.py">
@@ -69,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Examples\" />
+    <Folder Include="Exercises\" />
     <Folder Include="verteilungen\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />

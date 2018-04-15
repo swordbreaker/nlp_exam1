@@ -1,3 +1,5 @@
+from scipy.stats import geom
+
 class GeometrischeVerteilung():
     """description of class"""
 
@@ -19,6 +21,9 @@ class GeometrischeVerteilung():
 
     def variance(self):
         return (1 - self.p)/(self.p ** 2)
+
+    def cdf(self, k):
+        return geom.cdf(k, self.p)
 
 def geo_prop(X, p):
     geo = GeometrischeVerteilung(p)

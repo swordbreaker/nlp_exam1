@@ -1,5 +1,6 @@
 import numpy as np
 from graphviz import Digraph
+from sklearn.utils.extmath import cartesian
 
 # Der Vorwärts-Algoritmus berechnet rekursiv die Wahrscheinlichkeiten alpha_t(i)=fw[t,i]=P(o_1...o_t|x_t=i), 
 # d.h. die Wahrscheinlichkeit nach t Schritten die Beobachtungssequenz o_1...o_t (gemäss der Vorgabe) gemacht
@@ -170,7 +171,7 @@ def hmm_viterbi(U,E,p0,o):
 class Hmm(object):
     """description of class"""
 
-    def __init__(self, U,E,p0,o):
+    def __init__(self, U,E,p0,o, hidden_labels=None, observe_labels=None):
         """
         U    (Übergangswahrscheinlichkeiten)
         E    (Emissionswahrscheinlichkeiten)
@@ -182,6 +183,8 @@ class Hmm(object):
         self.E = E
         self.p0 = p0
         self.o = o
+        self.observe_labels = observe_labels
+        self.hidden_labels = hidden_labels
 
     def draw_graph(self):
         n = self.p0.shape[1]
@@ -195,8 +198,11 @@ class Hmm(object):
         
         dot.render('graphviz/hmm.gv', view=True)
 
-    def forward(self):
-        return hmm_forward(self.U, self.E, self.p0, self.o)
+    def forward(self, o = None):
+        if o is None:
+            o = self.o
+
+        return hmm_forward(self.U, self.E, self.p0, o)
 
     def backward(self):
         return hmm_backward(self.U, self.E, self.p0, self.o)
@@ -204,10 +210,39 @@ class Hmm(object):
     def forward_backward(self):
         return hmm_forward_backward(self.U, self.E, self.p0, self.o)
 
-    def viterbi(self):
-        return hmm_viterbi(self.U, self.E, self.p0, self.o)
+    def viterbi(self, o = None):
+        if o is None:
+            o = self.o
 
+        if self.hidden_labels is None:
+            return hmm_viterbi(self.U, self.E, self.p0, o)
+        else:
+            p, a = hmm_viterbi(self.U, self.E, self.p0, o)
+            l = [self.hidden_labels[int(i)] for i in a]
+            return p, l
 
+    def best_o(self, n):
+        """ returns the best observation with n observations
+            returns (probability, observation)
+        """
+        max = 0
+        comb = None
+
+        r = self.E.shape[1]
+
+        cart = []
+        for i in range(n):
+            cart.append(np.arange(r))
+
+        for a in cartesian(cart):
+            p, _ = self.forward(np.array([a]))
+            if(p > max):
+                max = p
+                comb = a
+
+        if self.observe_labels is not None:
+            comb = [self.observe_labels[int(c)] for c in comb]
+        return max, comb
 
 def example():
     U = np.array([
@@ -233,5 +268,3 @@ def example():
     print(f"Die Wahrscheinlichkeit für die Beobachtung über die beste Pfadsequenz zu machen: {q}")
 
     hmm.draw_graph()
-
-example()

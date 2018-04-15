@@ -1,4 +1,5 @@
 from scipy.special import binom
+from scipy.stats import hypergeom
 
 class HypergeometrischeVerteilung():
     """description of class"""
@@ -16,6 +17,7 @@ class HypergeometrischeVerteilung():
         return (binom(self.N - self.M, self.n - k) * binom(self.M, k)) / binom(self.N, self.n)
 
     def probability(self, k):
+        """ Wie gross ist die warscheinlichkeit das in der stichprobe k objekte mit der Eigeschaft A vorhanden sind"""
         if(type(k) == list):
             return [self.__prob(ki) for ki in k]
         else:
@@ -26,6 +28,9 @@ class HypergeometrischeVerteilung():
 
     def variance(self):
         return self.n * self.M/self.N * (self.N - self.M)/self.N * (self.N - self.n)/(self.N - 1)
+
+    def cdf(self, k):
+        return hypergeom.cdf(k, self.N, self.M, self.n)
 
 def binom_prop(X, n, p):
     bio = BinomialVerteilung(n, p)
