@@ -60,6 +60,7 @@ class MM():
             l = 0
             for j in range(c):
                 if i == j: 
+                    if(U[i,j] == 1): continue
                     if(U[i,j] != 0):
                         A[i-k,j-l] = 1 - U[i,j]
                         s += f"{1 - U[i,j]} * p{j} + "
